@@ -51,7 +51,7 @@ $conn->close();
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #000000;
         }
         .container {
             display: flex;
@@ -108,7 +108,7 @@ $conn->close();
             width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
-            background-color: #191970;
+            background-color: #ff6600;
             border: none;
             color: white;
             font-size: 16px;

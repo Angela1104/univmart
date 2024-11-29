@@ -11,24 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Check if the passwords match
     if ($new_password !== $confirm_password) {
         $messages[] = "Passwords do not match. Please try again.";
     } else {
-        // Check if the email exists in the database
         $sql = "SELECT id_profile FROM profile WHERE email_address = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $email_address);  // Use $email_address here
+        $stmt->bind_param("s", $email_address); 
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // If email exists, hash the new password and update the database
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
             $sql_update = "UPDATE profile SET password = ? WHERE email_address = ?";
             $stmt_update = $conn->prepare($sql_update);
-            $stmt_update->bind_param("ss", $hashed_password, $email_address); // Use $email_address here
+            $stmt_update->bind_param("ss", $hashed_password, $email_address);
 
             if ($stmt_update->execute()) {
                 $messages[] = "Your password has been reset successfully.";
@@ -38,13 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $messages[] = "There was an error updating your password. Please try again later.";
             }
 
-            // Close both statements
             $stmt_update->close();
         } else {
             $messages[] = "No account found with that email address.";
         }
 
-        // Close the first statement
         $stmt->close();
     }
 }
@@ -67,7 +62,7 @@ $conn->close();
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #000000;
         }
         .container {
             display: flex;
@@ -124,7 +119,7 @@ $conn->close();
             width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
-            background-color: #191970;
+            background-color: #ff6600;
             border: none;
             color: white;
             font-size: 16px;
@@ -171,7 +166,7 @@ $conn->close();
             <div class="logo">
                 <img src="static/logo.jpg" alt="UNIVMART Logo">
             </div>
-            <h1>"Reset Your Password"</h1>
+            <h1>"Where Students Trade with Ease"</h1>
         </div>
 
         <div class="right-section">
@@ -179,7 +174,7 @@ $conn->close();
                 <div class="messages">
                     <ul>
                         <?php foreach ($messages as $message): ?>
-                            <li><?php echo htmlspecialchars($message); ?></li>
+                           <li><?php echo htmlspecialchars($message); ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>

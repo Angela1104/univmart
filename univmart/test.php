@@ -91,7 +91,7 @@ $conn->close();
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #000000;
+            background-color: #f9f9f9;
             display: flex;
             flex-direction: column;
         }
@@ -295,22 +295,19 @@ $conn->close();
         }
 
         .post-container {
+            display: flex;
+            flex-direction: column;
             background: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 15px;
             margin-bottom: 20px;
-            width: 80%;
-            max-width: 1000px;
-            margin-left: auto;  
-            margin-right: auto; 
         }
 
         .post-container .user-info {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 15px;
         }
 
         .post-container .profile-pic {
@@ -320,25 +317,13 @@ $conn->close();
             border: 2px solid #ccc;
         }
 
-        .post-container .username {
-            font-weight: bold;  /* Makes the username bold */
-            font-size: 16px;
-        }
-
         .post-container .post-content {
             margin-top: 15px;
         }
 
-        .post-container img {
-            width: 100%;
-            height: auto;
-            max-width: 300px;   /* Optional: limit image size */
-            border-radius: 5px; /* Optional: apply a border radius */
-        }
-
         .post-container button {
             margin-top: 15px;
-            background-color: #ff6600;
+            background-color: #0056b3;
             color: white;
             border: none;
             border-radius: 5px;
@@ -347,7 +332,7 @@ $conn->close();
         }
 
         .post-container button:hover {
-            background-color: #0056b3;
+            background-color: #ff6600;
         }
 
     </style>
@@ -386,7 +371,7 @@ $conn->close();
                 <img src="static/search.png" alt="Search" title="Search">
                 <span>Search</span>
             </a>
-            <a href="cart.php" class="icon-item">
+            <a href="#" class="icon-item">
                 <img src="static/cart.png" alt="Cart" title="Cart">
                 <span>Cart</span>
             </a>
@@ -417,20 +402,17 @@ $conn->close();
                 <div class="post-container">
                     <div class="user-info">
                         <img src="https://via.placeholder.com/50" alt="User" class="profile-pic">
-                        <span class="username"><?php echo htmlspecialchars($row['username']); ?></span>
+                        <span><?php echo htmlspecialchars($row['username']); ?></span>
                     </div>
                     <div class="post-content">
-                        <!-- Move the caption (description, price, and stock) above the image -->
-                        <p><?php echo htmlspecialchars($row['description']); ?></p>
-
-                        <!-- Post Image -->
                         <?php if (!empty($row['picture'])): ?>
                             <img src="<?php echo htmlspecialchars($row['picture']); ?>" alt="Post Image">
                         <?php endif; ?>
-                        <p><strong>Price:</strong> ₱<?php echo htmlspecialchars($row['price']); ?></p>
+                        <p><?php echo htmlspecialchars($row['description']); ?></p>
+                        <p><strong>Price:</strong> $<?php echo htmlspecialchars($row['price']); ?></p>
                         <p><strong>Stock:</strong> <?php echo htmlspecialchars($row['stock']); ?></p>
-                        <button>Message Seller</button>
                         <button>Add to Cart</button>
+                        <button>Message Seller</button>
                         <button>Purchase</button>
                     </div>
                 </div>
